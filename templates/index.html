@@ -4,48 +4,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: #f2f2f2; /* set background color */
+        }
+        form {
+            margin: 0 auto; /* center form on the page */
+            background-color: #fff; /* set background color for form */
+            padding: 20px; /* add padding to form */
+            width: 400px; /* set width of form */
+            box-shadow: 0px 0px 10px #ccc; /* add shadow effect to form */
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px; /* add padding to input fields */
+            margin-bottom: 10px; /* add margin to input fields */
+            border: none; 
+            border: 1px solid #ccc;
+            border-radius: 5px; 
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; 
+            color: #fff; 
+            cursor: pointer; 
+        }
+        input[type="submit"]:hover {
+            background-color: #3e8e41; 
+        }
+    </style>
 </head>
 <body>
-    <h1>form</h1>
-    <form action="/predict" method="post">
-       userName: <input type="text" name="userName" placeholder="user name"/>
-       <input type="submit" value="submit">
-
-    </form>
-
-eee
+    
     <form action="/predict" method="POST" enctype="application/json">
         <label for="ph">pH:</label>
-        <input type="text" id="ph" name="ph"><br><br>
-      
+        <input type="text" id="ph" name="ph" placeholder="pH" /><br /><br />
+    
         <label for="hardness">Hardness:</label>
-        <input type="text" id="hardness" name="hardness"><br><br>
-      
+        <input type="text" id="hardness" name="hardness" placeholder="Hardness" /><br /><br />
+    
         <label for="solids">Solids:</label>
-        <input type="text" id="solids" name="solids"><br><br>
-      
+        <input type="text" id="solids" name="solids" placeholder="Solids" /><br /><br />
+    
         <label for="chloramines">Chloramines:</label>
-        <input type="text" id="chloramines" name="chloramines"><br><br>
-      
+        <input type="text" id="chloramines" name="chloramines" placeholder="Chloramines" /><br /><br />
+    
         <label for="sulfate">Sulfate:</label>
-        <input type="text" id="sulfate" name="sulfate"><br><br>
-      
+        <input type="text" id="sulfate" name="sulfate" placeholder="Sulfate" /><br /><br />
+    
         <label for="conductivity">Conductivity:</label>
-        <input type="text" id="conductivity" name="conductivity"><br><br>
-      
+        <input type="text" id="conductivity" name="conductivity" placeholder="Conductivity" /><br /><br />
+    
         <label for="organic_carbon">Organic Carbon:</label>
-        <input type="text" id="organic_carbon" name="organic_carbon"><br><br>
-      
+        <input type="text" id="organic_carbon" name="organic_carbon" placeholder="Organic Carbon" /><br /><br />
+    
         <label for="trihalomethanes">Trihalomethanes:</label>
-        <input type="text" id="trihalomethanes" name="trihalomethanes"><br><br>
-      
+        <input type="text" id="trihalomethanes" name="trihalomethanes" placeholder="Trihalomethanes" /><br /><br />
+    
         <label for="turbidity">Turbidity:</label>
-        <input type="text" id="turbidity" name="turbidity"><br><br>
-      
-        <input type="submit" value="Submit">
-      </form>
-      <h1> {'ph': 7.2, 'Hardness': 300, 'Solids': 1000, 'Chloramines': 7, 'Sulfate': 200, 'Conductivity': 500, 'Organic_carbon': 20, 'Trihalomethanes': 50, 'Turbidity': 4}
-        headers = {'Content-type': 'application/json'}</h1>
+        <input type="text" id="turbidity" name="turbidity" placeholder="Turbidity" /><br /><br />
+    
+        <input type="submit" value="Submit" />
+    </form>
+    
       
 </body>
 </html>
