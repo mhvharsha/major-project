@@ -1,14 +1,30 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Centered Box with Image</title>
+	<style >
+		.center-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100px;
+			width:200px;
+		}
+		.center-box img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+	</style>
 </head>
 <body>
-    <h1>submitted  </h1>
-    <h1>{{n}} sdcs</h1>
-    <p>The value of n is {{ n }}</p>
-
+	<div class="center-box">
+		<img src="https://media.istockphoto.com/id/1290513416/photo/staying-hydrated.jpg?b=1&s=170667a&w=0&k=20&c=DSlu3BuR2ZLWY-lJJPWUIySkSw7gsJyumnWmRLPNuTU=" alt="Your Image" >
+	</div>
+	<h1> {{ n }}</h1>
+    
 </body>
 </html>
+
+
+

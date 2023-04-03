@@ -1,70 +1,122 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            background-color: #f2f2f2; /* set background color */
+        *{
+            box-sizing: border-box; 
+            margin: 0px;
+            padding: 0px;
         }
+        #img-div {
+            background-color: #f2f2f2;
+            
+            width: 100vw;
+            height: 100vh;
+            /* set background color */
+            /* background-image: url("https://images.theconversation.com/files/161848/original/image-20170321-5391-lhfxgo.jpg?ixlib=rb-1.1.0&rect=0%2C613%2C5616%2C2723&q=45&auto=format&w=1356&h=668&fit=crop");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.6;  */
+            background: linear-gradient(rgba(0, 0, 0, 0.87), rgba(0, 0, 0, 0.87)),
+        url("https://images.theconversation.com/files/161848/original/image-20170321-5391-lhfxgo.jpg?ixlib=rb-1.1.0&rect=0%2C613%2C5616%2C2723&q=45&auto=format&w=1356&h=668&fit=crop") center/cover fixed no-repeat;
+        }
+
         form {
-            margin: 0 auto; /* center form on the page */
-            background-color: #fff; /* set background color for form */
-            padding: 20px; /* add padding to form */
-            width: 400px; /* set width of form */
-            box-shadow: 0px 0px 10px #ccc; /* add shadow effect to form */
+
+            margin: 0 auto;
+            /* center form on the page */
+            /* background-image: url("https://jcdickerson.files.wordpress.com/2012/01/underwater.jpg"); */
+            /* set background color for form */
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 20px;
+            background-color:rgba(0, 0, 0, 0.863);
+            /* add padding to form */
+            width: 400px;
+            /* set width of form */
+            box-shadow: 0px 0px 10px #ccc;
+            /* add shadow effect to form */
+            border: 2px solid black;
         }
-        input[type="text"], input[type="submit"] {
-            padding: 10px; /* add padding to input fields */
-            margin-bottom: 10px; /* add margin to input fields */
-            border: none; 
-            border: 1px solid #ccc;
-            border-radius: 5px; 
-        }
+
+        input[type="text"],
         input[type="submit"] {
-            background-color: #4CAF50; 
-            color: #fff; 
-            cursor: pointer; 
+            padding: 10px;
+            /* add padding to input fields */
+            margin-bottom: 10px;
+            /* add margin to input fields */
+            border: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color:ghostwhite;
+
         }
+
+        input[type="submit"] {
+            background-color:darkgreen;
+            color: #fff;
+            cursor: pointer;
+        }
+
         input[type="submit"]:hover {
-            background-color: #3e8e41; 
+            background-color: #3e8e41;
+        }
+
+        label {
+            color:yellow;
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color:black;
         }
     </style>
 </head>
+
 <body>
+    <div id="img-div">
+
     
+
+
     <form action="/predict" method="POST" enctype="application/json">
         <label for="ph">pH:</label>
         <input type="text" id="ph" name="ph" placeholder="pH" /><br /><br />
-    
+
         <label for="hardness">Hardness:</label>
         <input type="text" id="hardness" name="hardness" placeholder="Hardness" /><br /><br />
-    
+
         <label for="solids">Solids:</label>
         <input type="text" id="solids" name="solids" placeholder="Solids" /><br /><br />
-    
+
         <label for="chloramines">Chloramines:</label>
         <input type="text" id="chloramines" name="chloramines" placeholder="Chloramines" /><br /><br />
-    
+
         <label for="sulfate">Sulfate:</label>
         <input type="text" id="sulfate" name="sulfate" placeholder="Sulfate" /><br /><br />
-    
+
         <label for="conductivity">Conductivity:</label>
         <input type="text" id="conductivity" name="conductivity" placeholder="Conductivity" /><br /><br />
-    
+
         <label for="organic_carbon">Organic Carbon:</label>
         <input type="text" id="organic_carbon" name="organic_carbon" placeholder="Organic Carbon" /><br /><br />
-    
+
         <label for="trihalomethanes">Trihalomethanes:</label>
         <input type="text" id="trihalomethanes" name="trihalomethanes" placeholder="Trihalomethanes" /><br /><br />
-    
+
         <label for="turbidity">Turbidity:</label>
         <input type="text" id="turbidity" name="turbidity" placeholder="Turbidity" /><br /><br />
-    
+
         <input type="submit" value="Submit" />
     </form>
-    
-      
+</div>
+
 </body>
+
 </html>
