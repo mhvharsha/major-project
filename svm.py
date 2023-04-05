@@ -1,71 +1,42 @@
+import pickle
 import pandas as pd
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, make_scorer
-from sklearn.model_selection import cross_val_score, train_test_split, GridSearchCV, StratifiedKFold
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 
-# Load the dataset
-df = pd.read_csv(r'csv\water_potability.csv')
-
-# Fill missing values with the mean
+# Load data
+df = pd.read_csv('csv/water_potability.csv')
 df.fillna(df.mean(), inplace=True)
-
-# Split the data into training and testing sets
 X = df.drop('Potability', axis=1)
-Y = df['Potability']
-X_train, X_test, Y_train, Y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=101, shuffle=True)
+y = df['Potability']
 
-# Define the SVM model
-svm_model = SVC()
+# Split data into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.33, random_state=42)
 
-# Define a narrower range of hyperparameters for the grid search
-C = [0.1, 1]
-gamma = [0.1, 'scale']
-kernel = ['linear', 'rbf']
-
-grid = dict(C=C, gamma=gamma, kernel=kernel)
-
-# Use a simpler cross-validation strategy with fewer splits and iterations
-cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=1)
-
-# Perform the grid search
-grid_search_svm = GridSearchCV(estimator=svm_model, param_grid=grid, n_jobs=-1, cv=cv,
-                               scoring='accuracy', error_score=0)
-grid_search_svm.fit(X_train, Y_train)
-
-# Print the best parameters and mean test score
-print(
-    f"Best: {grid_search_svm.best_score_:.3f} using {grid_search_svm.best_params_}")
-
-# Print the mean test score and standard deviation for each set of hyperparameters
-means = grid_search_svm.cv_results_['mean_test_score']
-stds = grid_search_svm.cv_results_['std_test_score']
-params = grid_search_svm.cv_results_['params']
-for mean, stdev, param in zip(means, stds, params):
-    print(f"{mean:.3f} ({stdev:.3f}) with: {param}")
-
-# Define a function to print the classification report and return the accuracy score
+# Preprocess data using StandardScaler
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
 
 
-def classification_report_with_accuracy_score(Y_test, y_pred2):
-    print(classification_report(Y_test, y_pred2))
-    return accuracy_score(Y_test, y_pred2)
 
 
-# Use the simpler cross-validation strategy with fewer splits and iterations for nested cross-validation
-nested_score = cross_val_score(grid_search_svm, X=X_train, y=Y_train, cv=cv,
-                               scoring=make_scorer(classification_report_with_accuracy_score))
-print(nested_score)
+# Create SVM model with RBF kernel
+model = SVC(kernel='rbf', random_state=42)
 
-# Evaluate the model on the testing set
-svm_y_predicted = grid_search_svm.predict(X_test)
-svm_grid_score = accuracy_score(Y_test, svm_y_predicted)
-print(svm_grid_score)
+# Train the model
+model.fit(X_train, y_train)
 
-# Print the confusion matrix
-confusion_matrix(Y_test, svm_y_predicted)
+# Make predictions on test set
+y_pred = model.predict(X_test)
 
-# Predict on a new data point
-X_svm = svm_model.predict([[5.735724, 158.318741, 25363.016594, 7.728601,
-                            377.543291, 568.304671, 13.626624, 75.952337, 4.732954]])
-print(X_svm)
+# Calculate accuracy score
+accuracy = accuracy_score(y_test, y_pred)
+
+# Save the model using pickle
+with open('svm_model.pkl', 'wb') as file:
+    pickle.dump(model, file)
+
+print(f'Accuracy: {accuracy:.2f}')
