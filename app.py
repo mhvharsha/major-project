@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def flask():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
 @app.route("/submit", methods=["POST"])
@@ -71,7 +71,7 @@ def predict():
     prediction_value = str(prediction[0])
     if (prediction_value == 0):
         a = misMatchFeatures(input_values)
-        return render_template("submit.html", n=str(a))
+        return render_template("undrinkable.html", n=str(a))
 
     return render_template("submit.html", n=str(prediction_value))
 
